@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-12">
     <img
-      [src]="selectedRecipe.imagePath"
+      [src]="selectedRecipe?.imagePath"
       alt=""
       class="img-responsive"
       style="max-height: 300px"
@@ -25,7 +25,7 @@
             To Shopping List
           </a>
         </li>
-        <li><a role="button">Edit Recipe</a></li>
+        <li><a [routerLink]="['edit']" role="button">Edit Recipe</a></li>
         <li><a role="button">Delete Recipe</a></li>
       </ul>
     </div>
@@ -39,7 +39,7 @@
 <div class="row">
   <div class="col-xs-12">
     <ul class="list-group">
-      @for (ingredient of selectedRecipe.ingredients; track $index) {
+      @for (ingredient of selectedRecipe?.ingredients; track $index) {
       <a class="list-group-item" style="cursor: pointer">
         {{ ingredient.name }} ({{ ingredient.amount }})
       </a>

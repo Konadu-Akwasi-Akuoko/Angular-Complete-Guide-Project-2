@@ -43,12 +43,23 @@ export class RecipeService {
 
   selectedRecipe = new EventEmitter<Recipe>();
 
-  getRecipes = () => {
-    return this.recipes.slice();
-  };
+  // getRecipes = () => {
+  //   return this.recipes.slice();
+  // };
 
-  getRecipe(id: number): Recipe {
-    return this.recipes.filter((recipe: Recipe) => recipe.id == id)[0];
+  public get getRecipes(): Recipe[] {
+    return this.recipes.slice();
+  }
+
+  getRecipe(id: number): Recipe | null {
+    // handle invalid id, and when the id is not in the array
+
+    // return this.recipes.filter((recipe: Recipe) => recipe.id == id)[0];
+
+    let detailedRecipe = this.recipes.filter(
+      (recipe: Recipe) => recipe.id == id
+    )[0];
+    return detailedRecipe ? detailedRecipe : null;
   }
 
   addToIngredients(ingredient: Ingredient[]) {

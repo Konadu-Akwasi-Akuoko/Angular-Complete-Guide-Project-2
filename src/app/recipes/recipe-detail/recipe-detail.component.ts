@@ -13,8 +13,8 @@ export class RecipeDetailComponent implements OnInit {
 
   constructor(
     private recipeService: RecipeService,
-    private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.selectedRecipe = null;
   }
@@ -22,8 +22,13 @@ export class RecipeDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       let id = params['id'];
-      // console.log(id);
+      let recipeDetails = this.recipeService.getRecipe(id);
+      // If the recipe does not exist, redirect to the recipes page, by early return
+      if (!recipeDetails) {
+        return this.router.navigate(['/recipes']);
+      }
       this.selectedRecipe = this.recipeService.getRecipe(id);
+      
     });
 
     // this.recipeService.selectedRecipe.subscribe((recipe: Recipe) => {
